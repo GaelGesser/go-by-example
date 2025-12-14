@@ -83,3 +83,41 @@ Esse tipo de função pode receber qualquer número de parametros, segue exemplo
   }
 ```
 
+## 11.3 Closures
+
+Go tem suporte a funções anonimas, que pode formar closures.
+
+
+A função `intSeq` retorna outra função, que definimos anonimamente no corpo de `intSeq`. A função retornada realiza um fechamento sobre a variável `i` para formar um fechamento.
+
+```go
+  package main
+
+  import "fmt"
+
+  func intSeq() func() int {
+      i := 0
+      return func() int {
+          i++
+          return i
+      }
+  }
+
+  func main() {
+
+      nextInt := intSeq()
+
+      fmt.Println(nextInt()) // 1
+      fmt.Println(nextInt()) // 2
+      fmt.Println(nextInt()) // 3
+
+      newInts := intSeq()
+      fmt.Println(newInts()) // 1
+  }
+
+  // $ go run closures.go
+  // 1
+  // 2
+  // 3
+  // 1
+```
