@@ -121,3 +121,40 @@ A função `intSeq` retorna outra função, que definimos anonimamente no corpo 
   // 3
   // 1
 ```
+
+## 11.4 Recursion
+
+Uma função Recursion é uma função que chama a si mesma.
+
+```go
+  package main
+
+  import "fmt"
+
+  func fact(n int) int {
+      if n == 0 {
+          return 1
+      }
+      return n * fact(n-1)
+  }
+
+  func main() {
+      fmt.Println(fact(7))
+
+      var fib func(n int) int
+
+      fib = func(n int) int {
+          if n < 2 {
+              return n
+          }
+
+          return fib(n-1) + fib(n-2)
+      }
+
+      fmt.Println(fib(7))
+  }
+
+  // $ go run recursion.go 
+  // 5040
+  // 13
+```
